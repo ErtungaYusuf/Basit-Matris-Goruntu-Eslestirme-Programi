@@ -4,13 +4,13 @@
 
 2-Kendi elinizle belirlediğiniz matrisleri; kod kısmından aşağıdaki matrisleri değitirip,program başında sorulara uygun cevaplar vererek kullanabilirsiniz
 ========================================
- int arananMatrisElle[3][3] = {//aranacak olan matris, satır 140
+ int arananMatrisElle[3][3] = {//aranacak olan matris, satır 148
     {0, 1, 0},
     {0, 1, 0},
     {1, 1, 1}
     }; 
 ========================================
-	int elleGirilenMatris[10][10] = {//içerisinde arama yapılacak matris,  satır 112
+	int elleGirilenMatris[10][10] = {//içerisinde arama yapılacak matris,  satır 120
     {0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0},
