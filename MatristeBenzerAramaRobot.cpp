@@ -2,100 +2,100 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <locale.h>// programa Türkçe dil desteği eklemek için gereken kütüphanenin dahil edilmesi
+#include <locale.h>// programa TÃ¼rkÃ§e dil desteÄŸi eklemek iÃ§in gereken kÃ¼tÃ¼phanenin dahil edilmesi
 
-void rastgeleDegerlerAta(int** matrix,int N){//10x10'luk matrise rastgele değerler atayan fonksiyon. 
+void rastgeleDegerlerAta(int** matrix,int N){//10x10'luk matrise rastgele deÄŸerler atayan fonksiyon. 
     srand(time(NULL)); //random fonksiyonunun time ile beslenmesi
-    int i,j;//döngü indexlerinin oluşturulması
+    int i,j;//dÃ¶ngÃ¼ indexlerinin oluÅŸturulmasÄ±
     for(i=0;i<N;i++){//xlerin gezilmesi
         for(j=0;j<N;j++){//ylerin gezilmesi
-            matrix[i][j] = rand() % 2; //0 veya 1 olmak üzere gezilen elemanlara tek ek rastgele değer atanması
+            matrix[i][j] = rand() % 2; //0 veya 1 olmak Ã¼zere gezilen elemanlara tek ek rastgele deÄŸer atanmasÄ±
         }
     }
 }
-void matrixiYazdir(int** matrix,int N){// matrixi ekrana yazdıran fonksiyon
-	 int i,j;//döngü indexlerinin oluşturulması
+void matrixiYazdir(int** matrix,int N){// matrixi ekrana yazdÄ±ran fonksiyon
+	 int i,j;//dÃ¶ngÃ¼ indexlerinin oluÅŸturulmasÄ±
     for(i=0;i<N;i++){//xlerin gezilmesi
         for(j=0;j<N;j++){//ylerin gezilmesi
-           printf("%d ",matrix[i][j]);//gezilen her elemanın yazdırılması
+           printf("%d ",matrix[i][j]);//gezilen her elemanÄ±n yazdÄ±rÄ±lmasÄ±
         }
-        printf("\n");//her yeni satırda bir aşağı geçilmesi
+        printf("\n");//her yeni satÄ±rda bir aÅŸaÄŸÄ± geÃ§ilmesi
     }
 }
 
-int belirliKismiAra(int** matrix,int** arananMatrix,int arananMatrixboyu, int x1,int y1){//verilen matrisin; x1 ve y1 değerleri ile sınırlandıılmış kısmında
-                                                                           //aranan matris ile ne kadar eşleşmeye sahip olduğunu bulan ve bunu döndüren fonksiyon örneğin
-                                                                           //main kısmında bu fonksiyon döngü içerisinde çağrılarak olası tüm 3x3'lük kısımların denenmesi sağlanır
-	int benzerlikSayaci = 0;//uyuşmaları sayacak olan sayaç
-	int i = 0,j = 0;//aranan matrisi gezecek olan index değişkenleri
-	int a = 0,b = 0;//üzerinde aama yapılacak matrisi gezmek için kullanılacak döngü değişkenleri
+int belirliKismiAra(int** matrix,int** arananMatrix,int arananMatrixboyu, int x1,int y1){//verilen matrisin; x1 ve y1 deÄŸerleri ile sÄ±nÄ±rlandÄ±Ä±lmÄ±ÅŸ kÄ±smÄ±nda
+                                                                           //aranan matris ile ne kadar eÅŸleÅŸmeye sahip olduÄŸunu bulan ve bunu dÃ¶ndÃ¼ren fonksiyon Ã¶rneÄŸin
+                                                                           //main kÄ±smÄ±nda bu fonksiyon dÃ¶ngÃ¼ iÃ§erisinde Ã§aÄŸrÄ±larak olasÄ± tÃ¼m 3x3'lÃ¼k kÄ±sÄ±mlarÄ±n denenmesi saÄŸlanÄ±r
+	int benzerlikSayaci = 0;//uyuÅŸmalarÄ± sayacak olan sayaÃ§
+	int i = 0,j = 0;//aranan matrisi gezecek olan index deÄŸiÅŸkenleri
+	int a = 0,b = 0;//Ã¼zerinde aama yapÄ±lacak matrisi gezmek iÃ§in kullanÄ±lacak dÃ¶ngÃ¼ deÄŸiÅŸkenleri
 
-	for(a = x1,i = 0;a<x1+arananMatrixboyu;a++,i++){//Arama işlemini yapar. örneğin 3x3lük matrisi dönmeye 0,0 dan başlamak istediğimizden i ve j 0'dan başlatılır.10x10'luk matrisin istenilen 3x3lük kısmını
-	                                  //gezmek itediğimizden a=x1'e, b ise y1'e eşitlenir bu sayede dönmeye istenilen yerden başlanır. 3x3lük bir alan dönmek istedi-
-	                                  //ğimiz için a ve b 3 fazlasına eşit oluncaya kadar devam eder.
+	for(a = x1,i = 0;a<x1+arananMatrixboyu;a++,i++){//Arama iÅŸlemini yapar. Ã¶rneÄŸin 3x3lÃ¼k matrisi dÃ¶nmeye 0,0 dan baÅŸlamak istediÄŸimizden i ve j 0'dan baÅŸlatÄ±lÄ±r.10x10'luk matrisin istenilen 3x3lÃ¼k kÄ±smÄ±nÄ±
+	                                  //gezmek itediÄŸimizden a=x1'e, b ise y1'e eÅŸitlenir bu sayede dÃ¶nmeye istenilen yerden baÅŸlanÄ±r. 3x3lÃ¼k bir alan dÃ¶nmek istedi-
+	                                  //ÄŸimiz iÃ§in a ve b 3 fazlasÄ±na eÅŸit oluncaya kadar devam eder.
 	   for(b = y1,j = 0;b<y1+arananMatrixboyu;b++,j++){
-	   	printf("matrix[%d][%d]: %d - arananMatrix[%d][%d]: %d\n",a,b,matrix[a][b],i,j,arananMatrix[i][j]);//arama işleminin nasıl olduğunun kullanıcı tarafından da görülebilmesi için
-	   	                                                                                                  //her arama sonucu yazdırır
-	   	if(*(matrix[a] + b) == *(arananMatrix[i] + j)){//matrix[a] matrix[a][index]'in ilk elemanını ifade eder, o halde *(matrix[a]+b) yapılarak matrix[a][b]'ye ulaşılabilir
-	   	                                               //aynısı arananMatrix için de geçerlidir
-	   		benzerlikSayaci++; //eğer bir eşleşme varsa sayaç 1 arttırılıyor
+	   	printf("matrix[%d][%d]: %d - arananMatrix[%d][%d]: %d\n",a,b,matrix[a][b],i,j,arananMatrix[i][j]);//arama iÅŸleminin nasÄ±l olduÄŸunun kullanÄ±cÄ± tarafÄ±ndan da gÃ¶rÃ¼lebilmesi iÃ§in
+	   	                                                                                                  //her arama sonucu yazdÄ±rÄ±r
+	   	if(*(matrix[a] + b) == *(arananMatrix[i] + j)){//matrix[a] matrix[a][index]'in ilk elemanÄ±nÄ± ifade eder, o halde *(matrix[a]+b) yapÄ±larak matrix[a][b]'ye ulaÅŸÄ±labilir
+	   	                                               //aynÄ±sÄ± arananMatrix iÃ§in de geÃ§erlidir
+	   		benzerlikSayaci++; //eÄŸer bir eÅŸleÅŸme varsa sayaÃ§ 1 arttÄ±rÄ±lÄ±yor
 		   }
 	   }
-     printf("\n------------------------------\n");//çıktının okunaklı olması için konulmuş kesme işaretleri
+     printf("\n------------------------------\n");//Ã§Ä±ktÄ±nÄ±n okunaklÄ± olmasÄ± iÃ§in konulmuÅŸ kesme iÅŸaretleri
 	}
-	printf("\nbulunan toplam benzerlik sayisi: %d\n\n\n",benzerlikSayaci);//bulunan toplam benzerlik sayısı yazdırılıyor
-		 printf("\n==========================================================\n");//çıktının okunaklı olması için konulmuş kesme işaretleri
-	return benzerlikSayaci;//sayaç döndürülüyor
+	printf("\nbulunan toplam benzerlik sayisi: %d\n\n\n",benzerlikSayaci);//bulunan toplam benzerlik sayÄ±sÄ± yazdÄ±rÄ±lÄ±yor
+		 printf("\n==========================================================\n");//Ã§Ä±ktÄ±nÄ±n okunaklÄ± olmasÄ± iÃ§in konulmuÅŸ kesme iÅŸaretleri
+	return benzerlikSayaci;//sayaÃ§ dÃ¶ndÃ¼rÃ¼lÃ¼yor
 	
 }
 
 int main() {
 	
-	setlocale(LC_ALL, "Turkish");//Türkçe dil desteğinin eklenmesi
+	setlocale(LC_ALL, "Turkish");//TÃ¼rkÃ§e dil desteÄŸinin eklenmesi
 	
-	int goruntuBoyutuN;//üzerinde arama yapılaccak matrixin boyutunu tutan değişken
-	int arananMatrisBoyutu;//aranacak matrisin boyutunu tutan değişken
-	int x1=0,y1=0;//bulunan kısmın koordinatlarını tutacak değişkenler
-    int enBenzerBenzemeSayisi = 0;//en çok uyuşanın ne kadar hücresinin uyuştuğunu tutacak değişken
-    int rastgeleDegerlerAtaBoolTercih1 = 0;//sorularda verilen cevapların uygulanmasını sağlayacak değişkenler doğrudan tercih1 ve tercih2 değişkenleri de kullanılabilir ancak 
-                                           //okunaklı olması için bu şekilde yapılmıştır
+	int goruntuBoyutuN;//Ã¼zerinde arama yapÄ±laccak matrixin boyutunu tutan deÄŸiÅŸken
+	int arananMatrisBoyutu;//aranacak matrisin boyutunu tutan deÄŸiÅŸken
+	int x1=0,y1=0;//bulunan kÄ±smÄ±n koordinatlarÄ±nÄ± tutacak deÄŸiÅŸkenler
+    int enBenzerBenzemeSayisi = 0;//en Ã§ok uyuÅŸanÄ±n ne kadar hÃ¼cresinin uyuÅŸtuÄŸunu tutacak deÄŸiÅŸken
+    int rastgeleDegerlerAtaBoolTercih1 = 0;//sorularda verilen cevaplarÄ±n uygulanmasÄ±nÄ± saÄŸlayacak deÄŸiÅŸkenler doÄŸrudan tercih1 ve tercih2 deÄŸiÅŸkenleri de kullanÄ±labilir ancak 
+                                           //okunaklÄ± olmasÄ± iÃ§in bu ÅŸekilde yapÄ±lmÄ±ÅŸtÄ±r
     int rastgeleDegerlerAtaBoolTercih2 = 0;
         
-    //Kullanıcıya rastgele veya elle ayarlanmış matriste arama yapma seçeneği sunan soru:
-    char tercih1;//tercihi tutacak değişken
+    //KullanÄ±cÄ±ya rastgele veya elle ayarlanmÄ±ÅŸ matriste arama yapma seÃ§eneÄŸi sunan soru:
+    char tercih1;//tercihi tutacak deÄŸiÅŸken
     char tercih2;
-    char tekrar;//kullanıcının program bitiminde dilerse programı tekrar denemesini sağlayan tercihi tutan değişken
+    char tekrar;//kullanÄ±cÄ±nÄ±n program bitiminde dilerse programÄ± tekrar denemesini saÄŸlayan tercihi tutan deÄŸiÅŸken
     while(1){
-	    x1=0,y1=0;//programın her baştan çalışışında değerlerin sıfırlanması:
+	    x1=0,y1=0;//programÄ±n her baÅŸtan Ã§alÄ±ÅŸÄ±ÅŸÄ±nda deÄŸerlerin sÄ±fÄ±rlanmasÄ±:
 	    
 	    enBenzerBenzemeSayisi = 0;
 	    rastgeleDegerlerAtaBoolTercih1 = 0;
 	    rastgeleDegerlerAtaBoolTercih2 = 0;
 	    
     	while(1){
-    	printf("\nRobottan gelen görüntü matisinin N*N boyutunu seçin\n N:");
-    	scanf("%d",&goruntuBoyutuN);//üzerinde arama yapılacak matrisin boyut seçimi
+    	printf("\nRobottan gelen gÃ¶rÃ¼ntÃ¼ matisinin N*N boyutunu seÃ§in\n N:");
+    	scanf("%d",&goruntuBoyutuN);//Ã¼zerinde arama yapÄ±lacak matrisin boyut seÃ§imi
     	
-    	printf("\nAranacak matisin N*N boyutunu seçin\n N:");
-    	scanf("%d",&arananMatrisBoyutu);//aranacak matrisin boyut seçimi
+    	printf("\nAranacak matisin N*N boyutunu seÃ§in\n N:");
+    	scanf("%d",&arananMatrisBoyutu);//aranacak matrisin boyut seÃ§imi
 
-    	printf("\nKendi Belirlediğiniz matrisde mi arama yapmak istersiniz yoksa rastgele bir matris üzerinden mi arama yapmak istersiniz?\n");
-		printf("\nÖnemli not: Kendi belirleyeceğiniz matrisi seçerseniz kod kısmından matrislerinizin boyutlarının seçtiğiniz boyutlara uygun olduğundan emin olmak zorundasınız\n");
-		printf("\n(rastgel icin r, kendi belirlediğiniz icin k yazınız):");//üzerinde arama yapılacak matrisin rastgelelik seçimi
-   	    getchar();//bir hatadan dolayı programın direk geçmemesi için bekletme
-	   	scanf("%c",&tercih1);//kullanıcının isteği doğrultusunda cevabı alır ve tercih1 değişkenine atar
+    	printf("\nKendi BelirlediÄŸiniz matrisde mi arama yapmak istersiniz yoksa rastgele bir matris Ã¼zerinden mi arama yapmak istersiniz?\n");
+		printf("\nÃ–nemli not: Kendi belirleyeceÄŸiniz matrisi seÃ§erseniz kod kÄ±smÄ±ndan matrislerinizin boyutlarÄ±nÄ±n seÃ§tiÄŸiniz boyutlara uygun olduÄŸundan emin olmak zorundasÄ±nÄ±z\n");
+		printf("\n(rastgel icin r, kendi belirlediÄŸiniz icin k yazÄ±nÄ±z):");//Ã¼zerinde arama yapÄ±lacak matrisin rastgelelik seÃ§imi
+   	    getchar();//bir hatadan dolayÄ± programÄ±n direk geÃ§memesi iÃ§in bekletme
+	   	scanf("%c",&tercih1);//kullanÄ±cÄ±nÄ±n isteÄŸi doÄŸrultusunda cevabÄ± alÄ±r ve tercih1 deÄŸiÅŸkenine atar
 	   	
-	   	printf("\nKendi Belirlediğiniz matrisi mi aramak istersiniz yoksa rastgele bir matrisi mi?\n");
-	   	printf("\n(rastgel icin r, kendi belirlediğiniz için k yazınız):");//aranacak matrisin rastgelelik seçimi
-   	    getchar();//aynı şekilde bir hatadan dolayı programın direk geçmemesi için bekletme
-	   	scanf("%c",&tercih2);//kullanıcının isteği doğrultusunda cevabı alır ve tercih2 değişkenine atar
+	   	printf("\nKendi BelirlediÄŸiniz matrisi mi aramak istersiniz yoksa rastgele bir matrisi mi?\n");
+	   	printf("\n(rastgel icin r, kendi belirlediÄŸiniz iÃ§in k yazÄ±nÄ±z):");//aranacak matrisin rastgelelik seÃ§imi
+   	    getchar();//aynÄ± ÅŸekilde bir hatadan dolayÄ± programÄ±n direk geÃ§memesi iÃ§in bekletme
+	   	scanf("%c",&tercih2);//kullanÄ±cÄ±nÄ±n isteÄŸi doÄŸrultusunda cevabÄ± alÄ±r ve tercih2 deÄŸiÅŸkenine atar
     
-        //tercihlere göre bool değişkenlerinin belirlenmesi:
-        //eğer ikisi de r seçildiyse rastgele boollarını 1 yapar. Eğer birisi seçilmişse yalnızca seçilenin bool'unu 1 yapar
+        //tercihlere gÃ¶re bool deÄŸiÅŸkenlerinin belirlenmesi:
+        //eÄŸer ikisi de r seÃ§ildiyse rastgele boollarÄ±nÄ± 1 yapar. EÄŸer birisi seÃ§ilmiÅŸse yalnÄ±zca seÃ§ilenin bool'unu 1 yapar
     	if(tercih1=='r' && tercih2=='r'){
     		rastgeleDegerlerAtaBoolTercih1 = 1;
     	    rastgeleDegerlerAtaBoolTercih2 = 1;
-    		break;//döngüyü bitirir ve aramayı başlatır
+    		break;//dÃ¶ngÃ¼yÃ¼ bitirir ve aramayÄ± baÅŸlatÄ±r
 		}else if(tercih1=='k' && tercih2=='r'){
     	    rastgeleDegerlerAtaBoolTercih2 = 1;  
 		    break;
@@ -103,22 +103,22 @@ int main() {
 	        rastgeleDegerlerAtaBoolTercih1 = 1; 
 		    break;
         }else{
-        	break;//hiç biri değilse program default başlatılır
+        	break;//hiÃ§ biri deÄŸilse program default baÅŸlatÄ±lÄ±r
 		}
    
 }
     
 	//==========================================================================================================================================
-	int i,j;//main içerisinde kullanılacak olan döngülerin döngü değişkenlerinin oluşturulması
+	int i,j;//main iÃ§erisinde kullanÄ±lacak olan dÃ¶ngÃ¼lerin dÃ¶ngÃ¼ deÄŸiÅŸkenlerinin oluÅŸturulmasÄ±
 	
-	//üzerinde arama yapılacak matrixin dinamik bellek ile oluşturulması:
-	int **robotunGoruntusu = (int**)malloc(goruntuBoyutuN * sizeof(int*));//ana bellek ayırma
-	for(i=0; i < goruntuBoyutuN; i++) {
-        robotunGoruntusu[i] = (int *)malloc(goruntuBoyutuN * sizeof(int));//yler için tek tek bellek ayırma
+	//Ã¼zerinde arama yapÄ±lacak matrixin dinamik bellek ile oluÅŸturulmasÄ±:
+	int **robotunGoruntusu = (int**)calloc(goruntuBoyutuN , sizeof(int*));tuN * sizeof(int*));       
+	for(i=0; i < goruntuBoyutuN; i++) {	                        
+        robotunGoruntusu[i] = (int *)calloc(goruntuBoyutuN , sizeof(int));//yler iÃ§in tek tek bellek ayÄ±rma
     }
      
-	int elleGirilenMatris[10][10] = { //bu matris değerleri kullanıcı kendisi girmek istediğinde değiştirmesi gereken kısım. N sayısına yanı goruntuBoyutuN değişkeninin tuttuğu sayıya
-	                          //uygun olup olmadığına dikkat edilmelidir. Boyut N*N olmalıdır
+	int elleGirilenMatris[10][10] = { //bu matris deÄŸerleri kullanÄ±cÄ± kendisi girmek istediÄŸinde deÄŸiÅŸtirmesi gereken kÄ±sÄ±m. N sayÄ±sÄ±na yanÄ± goruntuBoyutuN deÄŸiÅŸkeninin tuttuÄŸu sayÄ±ya
+	                          //uygun olup olmadÄ±ÄŸÄ±na dikkat edilmelidir. Boyut N*N olmalÄ±dÄ±r
     {0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0},
@@ -129,76 +129,76 @@ int main() {
     {0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0}
-    };  //robottan gelen görüntünün elle ayarlanması. Program çalıştığından bunun kullanımı veya rastgele oluşturulmasına dair bir soru soruluyor. 
-        //Programın doğru çalıştığını göstermek için, şimdilik ortaya aranan kısmı birebir koyup geri kalan yerleri sıfır yaptım. İsteğe göre değiştirilip program baştan çalıştırılabilir
+    };  //robottan gelen gÃ¶rÃ¼ntÃ¼nÃ¼n elle ayarlanmasÄ±. Program Ã§alÄ±ÅŸtÄ±ÄŸÄ±ndan bunun kullanÄ±mÄ± veya rastgele oluÅŸturulmasÄ±na dair bir soru soruluyor. 
+        //ProgramÄ±n doÄŸru Ã§alÄ±ÅŸtÄ±ÄŸÄ±nÄ± gÃ¶stermek iÃ§in, ÅŸimdilik ortaya aranan kÄ±smÄ± birebir koyup geri kalan yerleri sÄ±fÄ±r yaptÄ±m. Ä°steÄŸe gÃ¶re deÄŸiÅŸtirilip program baÅŸtan Ã§alÄ±ÅŸtÄ±rÄ±labilir
 
-    for (i = 0; i < goruntuBoyutuN; i++) {//elle girilen matrisi program boyunca kullanılan robotun görüntüsü matrisine eşitleyen döngüler
+    for (i = 0; i < goruntuBoyutuN; i++) {//elle girilen matrisi program boyunca kullanÄ±lan robotun gÃ¶rÃ¼ntÃ¼sÃ¼ matrisine eÅŸitleyen dÃ¶ngÃ¼ler
        for (j = 0; j < goruntuBoyutuN; j++) {
-        robotunGoruntusu[i][j] = elleGirilenMatris[i][j];//eşitleme işlemi
+        robotunGoruntusu[i][j] = elleGirilenMatris[i][j];//eÅŸitleme iÅŸlemi
         }
      }
      
   
-  	//aranacak matrixin dinamik bellek ile oluşturulması:
-    int **arananMatris = (int**)malloc(arananMatrisBoyutu*sizeof(int*));//ana bellek ayırma
+  	//aranacak matrixin dinamik bellek ile oluÅŸturulmasÄ±:
+    int **arananMatris = (int**)calloc(arananMatrisBoyutu , sizeof(int*));//ana bellek ayÄ±rma
     for(i=0; i < arananMatrisBoyutu; i++) {
-        arananMatris[i] = (int *)malloc(arananMatrisBoyutu * sizeof(int));//yler için tek tek bellek ayırma
+        arananMatris[i] = (int *)calloc(arananMatrisBoyutu , sizeof(int));//yler iÃ§in tek tek bellek ayÄ±rma
     }
     
-    int arananMatrisElle[3][3] = {//bu matris değerleri kullanıcı kendisi girmek istediğinde değiştirmesi gereken kısım. N sayısına yani arananMatrisBoyutu değişkeninin tuttuğu sayıya
-	                          //uygun olup olmadığına dikkat edilmelidir. Boyut N*N olmalıdır
+    int arananMatrisElle[3][3] = {//bu matris deÄŸerleri kullanÄ±cÄ± kendisi girmek istediÄŸinde deÄŸiÅŸtirmesi gereken kÄ±sÄ±m. N sayÄ±sÄ±na yani arananMatrisBoyutu deÄŸiÅŸkeninin tuttuÄŸu sayÄ±ya
+	                          //uygun olup olmadÄ±ÄŸÄ±na dikkat edilmelidir. Boyut N*N olmalÄ±dÄ±r
     {0, 1, 0},
     {0, 1, 0},
     {1, 1, 1}
-    }; //buradaki aranan matris. Sorudakinin aynısı,elle değiştirlenilir
+    }; //buradaki aranan matris. Sorudakinin aynÄ±sÄ±,elle deÄŸiÅŸtirlenilir
     
-    for (i = 0; i < arananMatrisBoyutu; i++) {//elle girilen matrisi program boyunca kullanılan aranan matrisine eşitleyen döngüler
+    for (i = 0; i < arananMatrisBoyutu; i++) {//elle girilen matrisi program boyunca kullanÄ±lan aranan matrisine eÅŸitleyen dÃ¶ngÃ¼ler
        for (j = 0; j < arananMatrisBoyutu; j++) {
-        arananMatris[i][j] = arananMatrisElle[i][j];//eşitleme işlemi
+        arananMatris[i][j] = arananMatrisElle[i][j];//eÅŸitleme iÅŸlemi
         }
      }
 
-     if(rastgeleDegerlerAtaBoolTercih1 && rastgeleDegerlerAtaBoolTercih2){//tercihlere göre matrislere rastgele değerler atanması
+     if(rastgeleDegerlerAtaBoolTercih1 && rastgeleDegerlerAtaBoolTercih2){//tercihlere gÃ¶re matrislere rastgele deÄŸerler atanmasÄ±
      	rastgeleDegerlerAta(robotunGoruntusu,goruntuBoyutuN);
      	rastgeleDegerlerAta( arananMatris,arananMatrisBoyutu);
-	 }else if(rastgeleDegerlerAtaBoolTercih1 ){//eğer ikisi de r seçilmişse iki matrise de rastgele değerler atar. yalnızca ilki r seçilmişse ona rastgele değerler atar
+	 }else if(rastgeleDegerlerAtaBoolTercih1 ){//eÄŸer ikisi de r seÃ§ilmiÅŸse iki matrise de rastgele deÄŸerler atar. yalnÄ±zca ilki r seÃ§ilmiÅŸse ona rastgele deÄŸerler atar
 	 	rastgeleDegerlerAta(robotunGoruntusu,goruntuBoyutuN);
-	 }else{//eğer bu bloğa kadar inebildiyse yalnızca aranan matris r seçilmiştir ona rastgele değerler atar ve program devam eder
+	 }else{//eÄŸer bu bloÄŸa kadar inebildiyse yalnÄ±zca aranan matris r seÃ§ilmiÅŸtir ona rastgele deÄŸerler atar ve program devam eder
 	 	rastgeleDegerlerAta( arananMatris,arananMatrisBoyutu);
 	 }
 	 
     //=================================================================================================================================================
 
 
-    for(i=0;i<1+goruntuBoyutuN-arananMatrisBoyutu;i++){//büyük bir karenin içerisinde daha küçük bir kareyi aradığımız için 1+goruntuBoyutuN-arananMatrisBoyutu defa arama yapmamz
-                                                       //yeterlidir. i ve j'yi sıfırdan başlattığımızda ise tüm olası ihtimalleri arayabiliriz
+    for(i=0;i<1+goruntuBoyutuN-arananMatrisBoyutu;i++){//bÃ¼yÃ¼k bir karenin iÃ§erisinde daha kÃ¼Ã§Ã¼k bir kareyi aradÄ±ÄŸÄ±mÄ±z iÃ§in 1+goruntuBoyutuN-arananMatrisBoyutu defa arama yapmamz
+                                                       //yeterlidir. i ve j'yi sÄ±fÄ±rdan baÅŸlattÄ±ÄŸÄ±mÄ±zda ise tÃ¼m olasÄ± ihtimalleri arayabiliriz
       for(j=0;j<1+goruntuBoyutuN-arananMatrisBoyutu;j++){
-      	 printf("\nburada aranıyor...\n");//çıktının okunaklı olması için konulmuş kesme işaretleri
-      	 matrixiYazdir(robotunGoruntusu,goruntuBoyutuN);//çıktının okunaklı olması ve kullanıcının tüm adımları görüp isterse takip edebilmesi için aranan matris her seferinde başa yazdırılır
+      	 printf("\nburada aranÄ±yor...\n");//Ã§Ä±ktÄ±nÄ±n okunaklÄ± olmasÄ± iÃ§in konulmuÅŸ kesme iÅŸaretleri
+      	 matrixiYazdir(robotunGoruntusu,goruntuBoyutuN);//Ã§Ä±ktÄ±nÄ±n okunaklÄ± olmasÄ± ve kullanÄ±cÄ±nÄ±n tÃ¼m adÄ±mlarÄ± gÃ¶rÃ¼p isterse takip edebilmesi iÃ§in aranan matris her seferinde baÅŸa yazdÄ±rÄ±lÄ±r
         
-    	 if(enBenzerBenzemeSayisi<belirliKismiAra(robotunGoruntusu,arananMatris,arananMatrisBoyutu,i,j)){//eğer şu anda denenen aranan matrisin benzeme miktarı eskisinden daha fazlaysa
-    	                                                                              //yeni en çok benzeyeni o ilan ediyor
-    	 	enBenzerBenzemeSayisi=belirliKismiAra(robotunGoruntusu,arananMatris,arananMatrisBoyutu,i,j);//yeni en çok benzeyenin benzeme miktarının güncellenmesi
-    	 	x1 = i;//yeni en çok benzeyenin koordinatlarının güncellenmesi
+    	 if(enBenzerBenzemeSayisi<belirliKismiAra(robotunGoruntusu,arananMatris,arananMatrisBoyutu,i,j)){//eÄŸer ÅŸu anda denenen aranan matrisin benzeme miktarÄ± eskisinden daha fazlaysa
+    	                                                                              //yeni en Ã§ok benzeyeni o ilan ediyor
+    	 	enBenzerBenzemeSayisi=belirliKismiAra(robotunGoruntusu,arananMatris,arananMatrisBoyutu,i,j);//yeni en Ã§ok benzeyenin benzeme miktarÄ±nÄ±n gÃ¼ncellenmesi
+    	 	x1 = i;//yeni en Ã§ok benzeyenin koordinatlarÄ±nÄ±n gÃ¼ncellenmesi
     	 	y1 = j;
 		 }
 	 }
 	}
-	printf("Not: Kendi elinizle arama seçeneğini seçip, matrise kod kısmından uygun boyut değişikliklerini yapmadıysanız bozulmalar oluşabilir. Boyutları düzenleyip tekrar deneyiniz");
-	printf("\n====================================================================\n");//çıktının okunaklı olması için konulmuş kesme işaretleri
-	printf("\nAranan Kısım:\n");
-	matrixiYazdir(arananMatris,arananMatrisBoyutu);//kullanıcı için aradığımız matrisi yazdırıyor
-    printf("\nEn çok benzeyen Kısım:\n");
-    for(i = x1; i < x1 + arananMatrisBoyutu; i++){//kullanıcı için x1 ve y1'i kullanarak en çok benzeyen kısmı yazdırıyor
+	printf("Not: Kendi elinizle arama seÃ§eneÄŸini seÃ§ip, matrise kod kÄ±smÄ±ndan uygun boyut deÄŸiÅŸikliklerini yapmadÄ±ysanÄ±z bozulmalar oluÅŸabilir. BoyutlarÄ± dÃ¼zenleyip tekrar deneyiniz");
+	printf("\n====================================================================\n");//Ã§Ä±ktÄ±nÄ±n okunaklÄ± olmasÄ± iÃ§in konulmuÅŸ kesme iÅŸaretleri
+	printf("\nAranan KÄ±sÄ±m:\n");
+	matrixiYazdir(arananMatris,arananMatrisBoyutu);//kullanÄ±cÄ± iÃ§in aradÄ±ÄŸÄ±mÄ±z matrisi yazdÄ±rÄ±yor
+    printf("\nEn Ã§ok benzeyen KÄ±sÄ±m:\n");
+    for(i = x1; i < x1 + arananMatrisBoyutu; i++){//kullanÄ±cÄ± iÃ§in x1 ve y1'i kullanarak en Ã§ok benzeyen kÄ±smÄ± yazdÄ±rÄ±yor
         for(j = y1; j < y1 + arananMatrisBoyutu; j++){
-           printf("%d ", robotunGoruntusu[i][j]);//yazdırma
+           printf("%d ", robotunGoruntusu[i][j]);//yazdÄ±rma
         }
-    printf("\n");//her yeni satırda aşağı inme
+    printf("\n");//her yeni satÄ±rda aÅŸaÄŸÄ± inme
    }
    	
-	printf("\nBenzeme Sayısı/miktarı: %d\n",enBenzerBenzemeSayisi);//kullanıcı için benzeme miktarını yazdırıyor
-   printf("\n(x,y) Matematiksel Koordinatları(benzeyen 3x3'luk matrisin sol ust köşesini ifade eder): x: %d y: %d ",y1+1,goruntuBoyutuN-x1);//koordinatlaı yazdırıyor. Ancak kulllanıcının daha ra-
-   //hat görebilmesi için matematiksel olarak yazdırıyor:
+	printf("\nBenzeme SayÄ±sÄ±/miktarÄ±: %d\n",enBenzerBenzemeSayisi);//kullanÄ±cÄ± iÃ§in benzeme miktarÄ±nÄ± yazdÄ±rÄ±yor
+   printf("\n(x,y) Matematiksel KoordinatlarÄ±(benzeyen 3x3'luk matrisin sol ust kÃ¶ÅŸesini ifade eder): x: %d y: %d ",y1+1,goruntuBoyutuN-x1);//koordinatlaÄ± yazdÄ±rÄ±yor. Ancak kulllanÄ±cÄ±nÄ±n daha ra-
+   //hat gÃ¶rebilmesi iÃ§in matematiksel olarak yazdÄ±rÄ±yor:
  
    //|(y ekseni)
    //|
@@ -210,31 +210,31 @@ int main() {
    //|(1,1)(2,1)......(10,1)
    //-------------------------------(x ekseni)
    
-   // Bunun sağlanması x1,y1 değil de y1+1,goruntuBoyutuN-x1 şeklinde printf'e yazılıyor
+   // Bunun saÄŸlanmasÄ± x1,y1 deÄŸil de y1+1,goruntuBoyutuN-x1 ÅŸeklinde printf'e yazÄ±lÄ±yor
 
-	printf("\nRobottan gelen görüntü:\n");//kullanıcı için son defa 10x10'luk matrisin yazılması
+	printf("\nRobottan gelen gÃ¶rÃ¼ntÃ¼:\n");//kullanÄ±cÄ± iÃ§in son defa 10x10'luk matrisin yazÄ±lmasÄ±
 	matrixiYazdir(robotunGoruntusu,goruntuBoyutuN);
 
-    //belleklerin serberst bırakılması:
+    //belleklerin serberst bÄ±rakÄ±lmasÄ±:
     for(i=0; i < goruntuBoyutuN; i++) {
-        free(robotunGoruntusu[i]); // yleri serbest bırakır
+        free(robotunGoruntusu[i]); // yleri serbest bÄ±rakÄ±r
     }
-    free(robotunGoruntusu); // ana bellek bloğunu serbest bırakır
+    free(robotunGoruntusu); // ana bellek bloÄŸunu serbest bÄ±rakÄ±r
     
      for(i=0; i < arananMatrisBoyutu; i++) {
-        free(arananMatris[i]); // yleri serbest bırakır
+        free(arananMatris[i]); // yleri serbest bÄ±rakÄ±r
     }
-    free(arananMatris); // ana bellek bloğunu serbest bırak
+    free(arananMatris); // ana bellek bloÄŸunu serbest bÄ±rak
    
    printf("\ntekrar denemek ister misiniz?(y/n)");
-   getchar();//aynı şekilde bir hatadan dolayı programın direk geçmemesi için bekletme
-   scanf("%c",&tekrar);//kullanıcının programı tekrar çalıştırmak isteyip istemediğinin tercihini alma
+   getchar();//aynÄ± ÅŸekilde bir hatadan dolayÄ± programÄ±n direk geÃ§memesi iÃ§in bekletme
+   scanf("%c",&tekrar);//kullanÄ±cÄ±nÄ±n programÄ± tekrar Ã§alÄ±ÅŸtÄ±rmak isteyip istemediÄŸinin tercihini alma
      if(tekrar=='y'){
-     	continue;//eğer devam etmek isterse döngü ile program baştan başlar
+     	continue;//eÄŸer devam etmek isterse dÃ¶ngÃ¼ ile program baÅŸtan baÅŸlar
 	 }else{
-	 	break;//eğer istemezse döngü kırılır program biter
+	 	break;//eÄŸer istemezse dÃ¶ngÃ¼ kÄ±rÄ±lÄ±r program biter
 	 }
    }
-    return 0;//programın sonlanması
+    return 0;//programÄ±n sonlanmasÄ±
 }
 
