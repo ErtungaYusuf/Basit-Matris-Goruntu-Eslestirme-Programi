@@ -32,4 +32,4 @@ Notlar:
 
 3-Aranacak matris boyutu, üzerinde arama yapılacak matrixten büyük olursa program doğru çalışmayacaktır. Hata alırsanız sebebi matrisin boyutlarının bu şekilde tanımlanmasından kaynaklanıyor olabilir.
 
-4-Matris boyutları çok yüksek seçilirse programın bitmesi çok uzun sürebilir. Çok yüksek matrislerle işlem yapmak isterseniz. İşlemlerin adımlarını çıktı olarak veren kod parçalarını yorum satırı yaparak deneyebilirsiniz.
+4-(Bu sorunun sebebi, calloc yerine malloc kullanılması olduğundan kod düzenlenip bu not kaldırılmıştır)
